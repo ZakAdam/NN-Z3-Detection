@@ -100,13 +100,15 @@ def stageTrain(config: yaml):
     """
         Load dataset 
     """
+    """ WANDB
     wandb.init(
-        project="cnn_exercise",
-        entity="loptosi-team",
+        project="detection",
+        entity="lol-predictor",
         config=config,
         group=config.get("group"),
         mode=config.get('wandb_mode', 'online')
     )
+    """
     device = (torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu"))
 
     loaderTrain = loadDogDataset(config, config["dataTrain"])
@@ -138,7 +140,7 @@ def stageTrain(config: yaml):
             opt.load_state_dict(checkpoint["opt"])
             model = model.to(device)
 
-    wandb.init(project="cnn_exercise_localization", entity="loptosi-team", config=config)
+    #wandb.init(project="cnn_exercise_localization", entity="loptosi-team", config=config)
 
     for epoch in range(config["epochs"]):
 

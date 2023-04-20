@@ -18,7 +18,7 @@ docker run \
     -v "${HOME}/.netrc":/root/.netrc \
     -v "${CWD}/..":/workspace/${PROJECT_NAME} \
     -v "/mnt/scratch/${USER}/${PROJECT_NAME}":/workspace/${PROJECT_NAME}/.mnt/scratch \
-    -v "/mnt/scratch/${USER}/data":/workspace/${PROJECT_NAME}/.mnt/data \
+    -v "/mnt/scratch/team/2022/tp-10/datasets/sr/h5":/workspace/${PROJECT_NAME}/.mnt/h5 \
     -v "/mnt/persist/${USER}/${PROJECT_NAME}":/workspace/${PROJECT_NAME}/.mnt/persist \
     -e CUDA_VISIBLE_DEVICES="${DEVICE}" \
     ${IMAGE_TAG} \

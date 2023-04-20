@@ -66,9 +66,10 @@ class DogDataset(Dataset):
 
     def __getitem__(self, idx):
         self.assert_open()
-        image, labels = self.load_raw(idx)
-        label, bbox = labels[0], labels[1:]
-
+        image, label = self.load_raw(idx)
+        converted_label = json.loads(label.tolist().decode())
+        bbox = converted_label['ball'][0]['center']
+        #label, bbox = labels[0], labels[1:]
 
         if self.apply_random_sized_bbox_safe_crop:
             image, bbox = utils.random_sized_bbox_safe_crop(image, bbox)
@@ -77,7 +78,7 @@ class DogDataset(Dataset):
         if self.as_tensor:
             image = DogDataset.to_tensor(image)
 
-        orig_image = image
+        orig_image = image  
         if self.transform is not None:
             image = self.transform(image)
 
@@ -88,10 +89,11 @@ class DogDataset(Dataset):
             return image, label
         
 
-
+        # Pre vaicej lopticiek co?
         return image, torch.tensor(self.convert_bounding_box(orig_image, bbox))
 
     def convert_bounding_box(self, image, bbox):
+        """
         xmin, ymin, xmax, ymax = bbox
 
         _, h, w = image.shape
@@ -109,10 +111,11 @@ class DogDataset(Dataset):
 
         bound_height = (ymax - ymin) / h
         bound_width = (xmax - xmin) / w
-
+        """
         dog_persence = 1.0
+        BBOX_SIZE = 40
 
-        return np.array([dog_persence, center_x, center_y, bound_height, bound_width], dtype=np.float)
+        return np.array([dog_persence, bbox[0], bbox[1], BBOX_SIZE, BBOX_SIZE], dtype=np.float)
 
     def assert_open(self):
         if not self.h5file:

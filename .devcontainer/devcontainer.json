@@ -30,7 +30,7 @@
 		// Volumes
 		"-v", "/mnt/scratch/${localEnv:USER}/${localWorkspaceFolderBasename}:/workspace/${localWorkspaceFolderBasename}/.mnt/scratch",
 		"-v", "/mnt/persist/${localEnv:USER}/${localWorkspaceFolderBasename}:/workspace/${localWorkspaceFolderBasename}/.mnt/persist",
-		"-v", "/mnt/scratch/${localEnv:USER}/data:/workspace/${localWorkspaceFolderBasename}/.mnt/data",
+		"-v", "/mnt/scratch/team/2022/tp-10/datasets/sr/h5:/workspace/${localWorkspaceFolderBasename}/.mnt/h5",
 		"-v", "${localEnv:HOME}/.netrc:/root/.netrc"
 	],
 
