@@ -11,13 +11,15 @@ DEVICE=0
 
 docker run \
     -it --rm \
-    --name "template" \
-    --runtime=nvidia \
+    --name "yolo-training" \
     --gpus all \
     --privileged \
     --shm-size 8g \
-    -v "${CWD}/..":/workspace \
-    -v "/mnt/data":/data \
-    -e CUDA_VISIBLE_DEVICES="$DEVICE" \
+    -v "${HOME}/.netrc":/root/.netrc \
+    -v "${CWD}/..":/workspace/${PROJECT_NAME} \
+    -v "/mnt/scratch/${USER}/${PROJECT_NAME}":/workspace/${PROJECT_NAME}/.mnt/scratch \
+    -v "/mnt/scratch/${USER}/data":/workspace/${PROJECT_NAME}/.mnt/data \
+    -v "/mnt/persist/${USER}/${PROJECT_NAME}":/workspace/${PROJECT_NAME}/.mnt/persist \
+    -e CUDA_VISIBLE_DEVICES="${DEVICE}" \
     ${IMAGE_TAG} \
     "$@" || exit $?
