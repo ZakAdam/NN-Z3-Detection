@@ -1,0 +1,21 @@
+train:
+  group: detection 
+  dataFolder: /data
+  dataTrain: dataset_train.h5
+  dataVal: dataset_test.h5
+  detectionGridSize: [7,7]
+  imageSize: [224,224]
+  nCategories: 120
+  optim_decay: 0
+  epochs: 20
+  numWorkers: 8
+  batchSize: 64
+  lr: 0.0001
+
+  saveCheckpoints: False
+
+  models:
+    f: [32,64,128,256,512]
+    classifier:
+      nHidden: 256
+      dropout: 0.4

@@ -1,0 +1,12 @@
+tqdm
+numpy
+xmltodict
+h5py
+opencv-python
+argparse
+matplotlib
+scikit-learn
+torchsummary
+wandb
+black
+torchmetrics
